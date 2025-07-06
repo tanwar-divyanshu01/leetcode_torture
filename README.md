@@ -1,7 +1,7 @@
 # leetcode_torture
 Leetcode Torture is a small app that keeps you on the LeetCode problem page until you submit a solution.
 
-##Setup:
+## Setup:
 
 Download all files into one folder.
 
@@ -11,7 +11,7 @@ Download and unzip Chrome-win64 from:
 https://storage.googleapis.com/chrome-for-testing-public/138.0.7204.92/win64/chrome-win64.zip
 (Keep the chrome-win64 folder in the same directory.)
 
-##To run:
+## To run:
 
 You can run main.py directly (after installing dependencies), 
 
@@ -27,7 +27,8 @@ pyinstaller --noconfirm --onefile --windowed `
 --add-data "problems.json:." `
 main.py
 
-###I have also provided an executale if someone wants to run the app directly (contains chrome-64 hence the file size): https://drive.google.com/file/d/1QtCgdFWFcRR4OgkxNO5ydcw_-PWfHbK_/view?usp=drive_link
+### I have also provided an executale if someone wants to run the app directly (contains chrome-64 hence the file size):
+https://drive.google.com/file/d/1QtCgdFWFcRR4OgkxNO5ydcw_-PWfHbK_/view?usp=drive_link
 
 The app uses:
 
