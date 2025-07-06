@@ -1,43 +1,4 @@
-# import os
-# import time
-# import requests
-# import logging
-# import pyautogui
-# import keyboard
-# import threading
-# import re
-# from selenium import webdriver
-# from selenium.webdriver.chrome.service import Service
-# from selenium.webdriver.chrome.options import Options
-# from selenium.webdriver.common.by import By
-# from selenium.webdriver.support.ui import WebDriverWait
-# from selenium.webdriver.support import expected_conditions as EC
-# from selenium.webdriver.common.action_chains import ActionChains
-# pyautogui.FAILSAFE = False
 
-# def resource_path(relative_path):
-#     """Resolve path inside PyInstaller onefile or normal run."""
-#     if hasattr(sys, '_MEIPASS'):
-#         return os.path.join(sys._MEIPASS, relative_path)
-#     return os.path.join(os.path.abspath("."), relative_path)
-
-# # Paths
-# driver_path = resource_path("chromedriver.exe")
-# chrome_binary_path = resource_path("chrome-win64/chrome.exe") 
-
-# chrome_options = Options()
-# chrome_options.binary_location = chrome_binary_path
-# chrome_options.add_argument("--start-maximized")  # optional
-# # chrome_options.add_argument("--headless=new")
-# chrome_options.add_argument("--disable-gpu")
-# chrome_options.add_argument("--no-sandbox")
-# chrome_options.add_argument("--disable-dev-shm-usage")
-# chrome_options.add_argument("--window-size=1920,1200")
-
-# service = Service(driver_path)
-# driver = webdriver.Chrome(service=service, options=chrome_options)
-
-#------------------------
 import os
 import time
 import requests

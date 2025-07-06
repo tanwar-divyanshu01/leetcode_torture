@@ -1,0 +1,5 @@
+requests
+pyautogui
+undetected-chromedriver
+pypiwin32
+selenium
