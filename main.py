@@ -5,6 +5,7 @@ import requests
 import logging
 import pyautogui
 import threading
+import keyboard
 import json
 import sys
 import re
@@ -50,8 +51,9 @@ problems_path = resource_path("problems.json")
 autohotkey_path = resource_path("AutoHotkey64.exe")
 blockahk_path = resource_path("block_keys_leetcode.ahk")
 
-#------------------------
+ahk_process = None
 
+#------------------------
 
 with open(problems_path, 'r') as file:
     data = json.load(file)
@@ -71,7 +73,10 @@ def runfull(selected):
     driver.fullscreen_window()
 
     def block_f11():
-        subprocess.Popen([autohotkey_path, blockahk_path])
+        global ahk_process
+        ahk_process = subprocess.Popen([autohotkey_path, blockahk_path])
+        keyboard.block_key('esc')
+        keyboard.wait()
 
     threading.Thread(target=block_f11, daemon=True).start()
 
@@ -125,26 +130,26 @@ def start_clicked():
     if selected:
         messagebox.showinfo("Please NOTE", "Use Ctrl + Enter to submit. (Ctrl + ') to run")
         runfull(selected)
+        if ahk_process:
+            ahk_process.terminate()
+            ahk_process = None
+        keyboard.unblock_key('esc')
         root.destroy()
     else:
         messagebox.showwarning("No selection", "Please choose an option before starting.")
 
-# Create main window
 root = tk.Tk()
 root.title("Leetcode Torture")
 root.geometry("300x260")
 
-# Title label
 label = tk.Label(root, text="Login first. Choose an option:")
 label.pack(pady=10)
 
-# Option selector (Radio buttons)
-choice = tk.StringVar(value="")  # Holds selected value
+choice = tk.StringVar(value="") 
 options = ["Easy", "Med.", "Hard"]
 for opt in options:
     tk.Radiobutton(root, text=opt, variable=choice, value=opt).pack(anchor='w')
 
-# Buttons in one frame
 button_frame = tk.Frame(root)
 button_frame.pack(pady=5)
 
@@ -154,7 +159,6 @@ start_button.pack(side='left', padx=10)
 loginbt = tk.Button(button_frame, text="Login", command=login)
 loginbt.pack(side='left', padx=10)
 
-# Link below buttons
 def open_link(event):
     webbrowser.open("https://x.com/DivyanshuT61518")
 
@@ -162,5 +166,13 @@ link = tk.Label(root, text="Connect with me on X", fg="blue", cursor="hand2")
 link.pack(pady=10)
 link.bind("<Button-1>", open_link)
 
-# Run the app
+def on_close():
+    global ahk_process
+    if ahk_process:
+        ahk_process.terminate()
+        ahk_process = None
+    keyboard.unblock_key('esc')
+    root.destroy()
+
+root.protocol("WM_DELETE_WINDOW", on_close)
 root.mainloop()
